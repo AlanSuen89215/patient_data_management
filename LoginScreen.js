@@ -1,9 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
 
-export default function LoginScreen() {
+export default function LoginScreen({navigation}) {
+    const onBtnSignInPressed = () => {
+        navigation.navigate('PatientList')
+    }
+
     return (
-        <Text style={{fontSize: 20}}>Login</Text>
+        <View style={styles.container}>
+          <Button title="Sign In" style={styles.rowContainer} onPress={onBtnSignInPressed} />
+        </View>
     )
 }
 

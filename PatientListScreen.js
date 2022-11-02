@@ -1,12 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput, SafeAreaView, FlatList} from 'react-native';
 
-export default function PatientListScreen() {
+export default function PatientListScreen({navigation}) {
   const onBtnAddPatientPressed = () => {
+    navigation.navigate('AddPatient')
+  }
 
+  const onItemPressed = (patientName) => {
+    navigation.navigate('ViewPatient')
   }
 
   let patientListData = [
+    {
+        id: '1',
+        patientName: 'Patient 1'
+    }    
   ]
 
   return (
@@ -19,16 +27,16 @@ export default function PatientListScreen() {
       <SafeAreaView style={styles.rowContainer}>
         <FlatList
           data={patientListData}
-          renderItem={({item}) => <Item patientName={item.patientName} />}
+          renderItem={({item}) => <Item patientName={item.patientName} onItemPressed={onItemPressed} />}
           keyExtractor={item => item.id} />
       </SafeAreaView>
     </View>
   )
 }
 
-function Item({patientName}) {
+function Item({patientName, onItemPressed}) {
   return (
-    <View style={styles.item}>
+    <View style={styles.item} onStartShouldSetResponder={ () => {onItemPressed(patientName)}}>
         <Text>{patientName}</Text>
     </View>
   )
