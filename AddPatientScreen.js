@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
-import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
 
-const AddPatientScreen = () => {
+export default function AddPatientScreen() {
   const [firstName, setFirstName] = React.useState('')
   const [lastName, setLastName] = React.useState('')
   const [age, setAge] = React.useState(0)
@@ -25,7 +25,7 @@ const AddPatientScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 20}}>Add patient</Text>
+      <Image style={styles.patientPhoto} source={require('./assets/box-arrow-in-up.png')} />
 
       <View style={styles.rowContainer}>
         <Text style={{flex: 1}}>First Name:</Text>
@@ -120,18 +120,19 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection:'column',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       fontSize: 20
     },
     rowContainer: {
       flexDirection:'row',
       alignItems: 'center',
       justifyContent: 'center',
-      height: 40
+      flex: 1
     },
     textInput: {
       borderWidth: 1
+    },
+    patientPhoto: {
+      flex: 8
     }
 });
-
-export default AddPatientScreen;

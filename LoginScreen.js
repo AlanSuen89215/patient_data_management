@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
 
-const LoginScreen = () => {
+export default function LoginScreen() {
     return (
         <Text style={{fontSize: 20}}>Login</Text>
     )
@@ -25,5 +25,3 @@ const styles = StyleSheet.create({
       borderWidth: 1
     }
 });
-
-export default LoginScreen;
