@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, Button, Image} from 'react-native';
 
 export default function ViewPatientScreen() {
@@ -50,12 +50,12 @@ function ClinicalDataHeader() {
   )
 }
 
-function ClinicalDataRow(props) {
+function ClinicalDataRow({dataType, reading, datetime}) {
   return (
     <View style={[styles.rowContainer, {borderBottomWidth: 1}]}>
-      <Text style={{flex: 1, borderLeftWidth: 1, borderRightWidth: 1}}>{props.dataType}</Text>
-      <Text style={{flex: 1, borderRightWidth: 1}}>{props.reading}</Text>
-      <Text style={{flex: 1, borderRightWidth: 1}}>{props.datetime}</Text>
+      <Text style={{flex: 1, borderLeftWidth: 1, borderRightWidth: 1}}>{dataType}</Text>
+      <Text style={{flex: 1, borderRightWidth: 1}}>{reading}</Text>
+      <Text style={{flex: 1, borderRightWidth: 1}}>{datetime}</Text>
     </View>
   )
 }
