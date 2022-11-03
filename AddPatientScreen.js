@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image, TouchableOpacity} from 'react-native';
 import EndPointConfig from './EndPointConfig';
+import * as DocumentPicker from 'expo-document-picker';
+import * as FileSystem from 'expo-file-system';
 
 export default function AddPatientScreen({navigation}) {
   const [firstName, setFirstName] = React.useState('')
@@ -18,6 +20,19 @@ export default function AddPatientScreen({navigation}) {
   const [department, setDepartment] = React.useState('')
   const [doctor, setDoctor] = React.useState('')
   const [photo, setPhoto] = React.useState('')
+  const [photoDisplayed, setPhotoDisplayed] = React.useState(require('./assets/box-arrow-in-up.png'))
+
+  const onPhotoPressed = async () => {
+    const file = await DocumentPicker.getDocumentAsync({
+      type: 'image/*'
+    })
+    let fileData = await FileSystem.readAsStringAsync(file.uri, {
+      encoding: FileSystem.EncodingType.Base64
+    })
+    fileData = 'data:' + file.mimeType + ';base64,' + fileData
+    setPhoto(fileData)
+    setPhotoDisplayed({uri: fileData})
+  }
 
   const onCancelPress = () => {
     navigation.navigate('PatientList')
@@ -65,7 +80,9 @@ export default function AddPatientScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.patientPhoto} source={require('./assets/box-arrow-in-up.png')} />
+      <TouchableOpacity style={{flex: 8, justifyContent: 'center'}} onPress={onPhotoPressed}>
+        <Image style={styles.patientPhoto} source={photoDisplayed} />
+      </TouchableOpacity>
 
       <View style={styles.rowContainer}>
         <Text style={{flex: 1}}>First Name:</Text>
@@ -136,6 +153,17 @@ export default function AddPatientScreen({navigation}) {
       </View>
 
       <View style={styles.rowContainer}>
+        <Text style={{flex: 1}}>Department:</Text>
+        <TextInput style={[styles.textInput, {flex: 1}]}
+          onChangeText={text => setDepartment(text)}
+          value={department} />
+        <Text style={{flex: 1}}>Doctor:</Text>
+        <TextInput style={[styles.textInput, {flex: 1}]}
+          onChangeText={text => setDoctor(text)}
+          value={doctor} />
+      </View>
+
+      <View style={styles.rowContainer}>
         <Text style={{flex: 1}}>Date of admission:</Text>
         <TextInput style={[styles.textInput, {flex: 1}]}
           onChangeText={text => setDateOfAdmission(text)}
@@ -173,6 +201,7 @@ const styles = StyleSheet.create({
       borderWidth: 1
     },
     patientPhoto: {
-      flex: 8
+      height: 240, 
+      width: 240
     }
 });
