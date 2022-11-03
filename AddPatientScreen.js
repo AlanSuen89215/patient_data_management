@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
+import EndPointConfig from './EndPointConfig';
 
-export default function AddPatientScreen() {
+export default function AddPatientScreen({navigation}) {
   const [firstName, setFirstName] = React.useState('')
   const [lastName, setLastName] = React.useState('')
   const [age, setAge] = React.useState(0)
@@ -14,13 +15,52 @@ export default function AddPatientScreen() {
   const [emergencyContactPhoneNumber, setEmergencyContactPhoneNumber] = React.useState('')
   const [dateOfAdmission, setDateOfAdmission] = React.useState('')
   const [bed, setBed] = React.useState('')
+  const [department, setDepartment] = React.useState('')
+  const [doctor, setDoctor] = React.useState('')
+  const [photo, setPhoto] = React.useState('')
 
   const onCancelPress = () => {
-    
+    navigation.navigate('PatientList')
   }
 
-  const onSubmitPress = () => {
-
+  // Send the data of the new patient to the server
+  const onSubmitPress = async () => {
+    const addPatientParams = {
+      first_name: firstName,
+      last_name: lastName,
+      address: address,
+      date_of_birth: dateOfBirth,
+      department: department,
+      doctor: doctor,
+      sex: sex,
+      phone_number: phoneNumber,
+      emergency_contact_first_name: emergencyContactFirstName,
+      emergency_contact_last_name: emergencyContactLastName,
+      emergency_contact_phone_number: emergencyContactPhoneNumber,
+      date_of_admission: dateOfAdmission,
+      bed_number: bed,
+      photo: photo
+    }
+    await fetch(EndPointConfig.urlAddPatient, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(addPatientParams)
+    })
+    .then(async (response) => {
+      let data = await response.json()
+      if (response.status == 201) { // success to add a patient in the server
+        navigation.navigate('PatientList') // navigate to the patient list screen
+      }
+      else { // server reject the adding patient request
+        alert(data.message) // display the server message of rejection
+      }
+    })
+    .catch((error) => { // unknown error
+      console.error(error)
+      alert('Fail to add patient due to unknown error')
+    })
   }
 
   return (
