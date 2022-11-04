@@ -7,7 +7,7 @@ import {
   TextInput,
   SafeAreaView,
   FlatList,
-  Pressable
+  Pressable,
 } from "react-native";
 
 export default function PatientListScreen({ navigation }) {

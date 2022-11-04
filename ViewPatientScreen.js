@@ -15,8 +15,13 @@ export default function ViewPatientScreen() {
   let heartBeatRateReading = "";
   let heartBeatRateDatetime = "";
 
-  const onBtnViewRecordsPressed = () => {};
-
+  const onBtnViewRecordsPressed = () => {
+    // navigation.navigate("");
+  };
+  const onBtnAddRecordPressed = () => {
+    navigation.navigate("AddRecord");
+    // NavigationPreloadManager.navigate("AddRecord");
+  };
   return (
     <View style={styles.container}>
       <Image
@@ -51,13 +56,21 @@ export default function ViewPatientScreen() {
           datetime={heartBeatRateDatetime}
         />
       </View>
+      <View style={styles.rowContainer}>
+        <Button
+          title="View records"
+          style={{ flex: 1 }}
+          color="#841584"
+          onPress={onBtnViewRecordsPressed}
+        />
 
-      <Button
-        title="View records"
-        style={{ flex: 1 }}
-        color="#841584"
-        onPress={onBtnViewRecordsPressed}
-      />
+        <Button
+          title="Add Record"
+          style={{ flex: 1 }}
+          color="#841584"
+          onPress={onBtnAddRecordPressed}
+        />
+      </View>
     </View>
   );
 }
