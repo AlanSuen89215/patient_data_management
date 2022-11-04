@@ -6,19 +6,20 @@ import {
   Button,
   Image,
   SafeAreaView,
+  TextInput,
 } from "react-native";
 import EndPointConfig from "./EndPointConfig";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system";
 
-export default function AddRecord() {
-  const [name, setName] = useState("");
-  const [treatment, setTreatment] = useState("");
-  const [dateOfRecord, setDateOfRecord] = useState("");
-  const [remark, setRemark] = useState("");
+export default function AddRecord({ navigation }) {
+  const [name, setName] = React.useState("");
+  const [treatment, setTreatment] = React.useState("");
+  const [dateOfRecord, setDateOfRecord] = React.useState("");
+  const [remark, setRemark] = React.useState("");
 
   const onCancelPress = () => {
-    navigate.navigate("PatientList");
+    navigation.navigate("ViewPatient");
   };
   const onAddPress = () => {
     navigation.navigate("PatientList");

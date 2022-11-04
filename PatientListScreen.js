@@ -33,6 +33,7 @@ export default function PatientListScreen({ navigation }) {
           style={styles.searchBox}
           placeholder="Search patients"
         ></TextInput>
+        
         <Pressable
           style={styles.btnAddPatient}
           color="#841584"

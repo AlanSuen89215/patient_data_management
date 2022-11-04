@@ -9,7 +9,8 @@ import PatientListScreen from './PatientListScreen';
 import PatientInCriticalListScreen from './PatientInCriticalListScreen';
 import DrawerItems from './DrawerItems';
 import DrawerHeader from './DrawerHeader';
-
+import PatientRecord from './PatientRecord'
+import AddRecordScreen  from './AddRecordScreen';
 //const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -27,6 +28,10 @@ export default function App() {
         return PatientListScreen
       case "PatientInCriticalList":
         return PatientInCriticalListScreen
+      case "PatientRecord":
+        return PatientRecord
+        case "AddRecord":
+        return AddRecordScreen
       default:
         return LoginScreen
     }
