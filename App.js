@@ -7,6 +7,11 @@ import LoginScreen from './LoginScreen'
 import ViewPatientScreen from './ViewPatientScreen';
 import PatientListScreen from './PatientListScreen';
 import PatientInCriticalListScreen from './PatientInCriticalListScreen';
+import DrawerItems from './DrawerItems';
+import DrawerHeader from './DrawerHeader';
+
+//const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
 
