@@ -28,7 +28,7 @@ export default function PatientListScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.rowContainer}>
+      <View style={styles.topBar}>
         <TextInput
           style={styles.searchBox}
           placeholder="Search patients"
@@ -73,30 +73,38 @@ function Item({ patientName, onItemPressed }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingTop: 60,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    paddingHorizontal: 5,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
     fontSize: 20,
-    padding: 5,
+    paddingBottom: 20,
   },
   rowContainer: {
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "center",
     flex: 1,
+  },
+  topBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     height: 100,
   },
   searchBox: {
     borderWidth: 1,
-    // flex: 1,
+    flex: 5,
     height: 50,
-    width: "80%",
+    fontSize: 30,
   },
   btnAddPatient: {
-    // flex: 1,
-    width: "20%",
+    flex: 1,
     fontSize: 40,
+    marginLeft: 20
   },
   add: {
     fontSize: 40,

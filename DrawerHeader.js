@@ -7,12 +7,14 @@ export default function DrawerHeader({ screen }) {
     
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={ () => navigation.toggleDrawer() }>
-                <Image style={{height: 30, width:30 }} source={require('./assets/icon.png')} />
+            <TouchableOpacity
+                style={styles.menuIconContainer}
+                onPress={ () => navigation.toggleDrawer() }>
+                <Image style={styles.menuIconImage} source={require('./assets/icon.png')} />
             </TouchableOpacity>
 
-            <View>
-                <Text>{screen}</Text>
+            <View style={styles.titleText}>
+                <Text >{screen}</Text>
             </View>
         </View>
     )
@@ -24,13 +26,22 @@ const styles = StyleSheet.create({
         top:30,
         left:0,
         width:'100%',
-        backgroundColor:'#fa7da7',
-        elevation:5,
-        height:50,
-        display:'flex',
+        height:30,
+        backgroundColor:'#BDBDBD',
         flexDirection:'row',
-        paddingHorizontal:20,
         alignItems:'center',
-        justifyContent:'space-between'
+        justifyContent: 'flex-start'
+    },
+    menuIconContainer: {
+        flex: 1,
+        width: 30
+    },
+    menuIconImage: {
+        height: 30,
+        width:30
+    },
+    titleText: {
+        flex: 1,
+        justifyContent: 'center'
     }
 })

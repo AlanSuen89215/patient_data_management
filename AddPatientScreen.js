@@ -96,7 +96,7 @@ export default function AddPatientScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={{ flex: 8, justifyContent: "center" }}
+        style={{ flex: 8, justifyContent: "center", alignItems: "center", margin: 5}}
         onPress={onPhotoPressed}
       >
         <Image style={styles.patientPhoto} source={photoDisplayed} />
@@ -124,9 +124,9 @@ export default function AddPatientScreen({ navigation }) {
           onChangeText={(text) => setAge(text)}
           value={age}
         />
-        <Text style={[styles.text, { flex: 1 }]}>Date of birth:</Text>
+        <Text style={[styles.text, { flex: 2 }]}>Date of birth:</Text>
         <TextInput
-          style={[styles.textInput, { flex: 1 }]}
+          style={[styles.textInput, { flex: 2 }]}
           onChangeText={(text) => setDateOfBirth(text)}
           value={dateOfBirth}
         />
@@ -141,14 +141,14 @@ export default function AddPatientScreen({ navigation }) {
         />
         <Text style={[styles.text, { flex: 1 }]}>Tel:</Text>
         <TextInput
-          style={[styles.textInput, { flex: 1 }]}
+          style={[styles.textInput, { flex: 1, flexGrow: 3 }]}
           onChangeText={(text) => setPhoneNumber(text)}
           value={phoneNumber}
         />
       </View>
 
       <View style={styles.rowContainer}>
-        <Text>Register address:</Text>
+        <Text style={styles.text}>Register address:</Text>
       </View>
 
       <View style={styles.rowContainer}>
@@ -191,28 +191,28 @@ export default function AddPatientScreen({ navigation }) {
       </View>
 
       <View style={styles.rowContainer}>
-        <Text style={[styles.textInput, { flex: 1 }]}>Department:</Text>
+        <Text style={[styles.text, { flex: 1 }]}>Department:</Text>
         <TextInput
-          style={[styles.textInput, { flex: 1 }]}
+          style={[styles.textInput, { flex: 2, flexGrow: 1.2 }]}
           onChangeText={(text) => setDepartment(text)}
           value={department}
         />
-        <Text style={[styles.textInput, { flex: 1 }]}>Doctor:</Text>
+        <Text style={[styles.text, { flex: 1 }]}>Doctor:</Text>
         <TextInput
-          style={[styles.textInput, { flex: 1 }]}
+          style={[styles.textInput, { flex: 2, flexGrow: 1.2 }]}
           onChangeText={(text) => setDoctor(text)}
           value={doctor}
         />
       </View>
 
       <View style={styles.rowContainer}>
-        <Text style={{ flex: 1 }}>Date of admission:</Text>
+        <Text style={[styles.text, { flex: 2 }]}>Date of admission:</Text>
         <TextInput
-          style={[styles.textInput, { flex: 1 }]}
+          style={[styles.textInput, { flex: 2 }]}
           onChangeText={(text) => setDateOfAdmission(text)}
           value={dateOfAdmission}
         />
-        <Text style={{ flex: 1 }}>Bed:</Text>
+        <Text style={[styles.text, { flex: 1 }]}>Bed:</Text>
         <TextInput
           style={[styles.textInput, { flex: 1 }]}
           onChangeText={(text) => setBed(text)}
@@ -220,31 +220,43 @@ export default function AddPatientScreen({ navigation }) {
         />
       </View>
 
-      <View style={styles.rowContainer}>
-        <Button
-          title="Cancel"
-          style={[{ flex: 1, padding: 10 }]}
-          color="#841584"
-          onPress={onCancelPress}
-        />
-        <Button
-          title="Submit"
-          style={[{ flex: 1, padding: 10 }]}
-          color="#841584"
-          onPress={onSubmitPress}
-        />
+      <View style={[styles.rowContainer, {flex: 2}]}>
+        <Text style={{ flex: 0.1 }} />
+        <View style={{ flex: 1, marginRight:5 }}>
+          <Button
+            title="Cancel"
+            style={{ flex: 1 }}
+            color="#4CAF50"
+            onPress={onCancelPress}
+          />
+        </View>
+        
+        <View style={{ flex: 1, marginLeft:5 }}>
+          <Button
+            title="Submit"
+            style={{ flex: 1 }}
+            color="#4CAF50"
+            onPress={onSubmitPress}
+          />
+        </View>
+        <Text style={{ flex: 0.1 }} />
       </View>
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingTop: 60,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    paddingHorizontal: 5,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
-    fontSize: 20,
+    fontSize: 14,
     paddingBottom: 20,
   },
   rowContainer: {
@@ -256,13 +268,13 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderWidth: 1,
-    height: 30,
   },
   patientPhoto: {
-    height: 240,
-    width: 240,
+    height: 120,
+    width: 120,
   },
   text: {
     fontSize: 14,
+    marginLeft: 5,
   },
 });

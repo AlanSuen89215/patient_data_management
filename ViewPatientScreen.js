@@ -24,10 +24,12 @@ export default function ViewPatientScreen() {
   };
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.patientPhoto}
-        source={require("./assets/box-arrow-in-up.png")}
-      />
+      <View style = {{ flex: 2, justifyContent: "center", alignItems: "center", margin: 5}}>
+        <Image 
+          style={styles.patientPhoto}
+          source={require("./assets/box-arrow-in-up.png")}
+        />
+      </View>
 
       <View style={styles.rowContainer}>
         <Text styles={{ flex: 1, borderWidth: 1, fontSize: 14 }}></Text>
@@ -56,20 +58,27 @@ export default function ViewPatientScreen() {
           datetime={heartBeatRateDatetime}
         />
       </View>
-      <View style={styles.rowContainer}>
-        <Button
-          title="View records"
-          style={{ flex: 1 }}
-          color="#841584"
-          onPress={onBtnViewRecordsPressed}
-        />
 
-        <Button
-          title="Add Record"
-          style={{ flex: 1 }}
-          color="#841584"
-          onPress={onBtnAddRecordPressed}
-        />
+      <View style={[styles.rowContainer, {flex: 2}]}>
+        <Text style={{ flex: 0.1 }} />
+        <View style={{ flex: 1, marginRight:5 }}>
+          <Button
+            title="View records"
+            style={{ flex: 1 }}
+            color="#4CAF50"
+            onPress={onBtnViewRecordsPressed}
+          />
+        </View>
+        
+        <View style={{ flex: 1, marginLeft:5 }}>
+          <Button
+            title="Add Record"
+            style={{ flex: 1 }}
+            color="#4CAF50"
+            onPress={onBtnAddRecordPressed}
+          />
+        </View>
+        <Text style={{ flex: 0.1 }} />
       </View>
     </View>
   );
@@ -83,22 +92,45 @@ function ClinicalDataHeader() {
         { backgroundColor: "#BDBDBD", borderTopWidth: 1, borderBottomWidth: 1 },
       ]}
     >
-      <Text
-        style={{
-          flex: 1,
-          borderLeftWidth: 1,
-          borderRightWidth: 1,
-          fontSize: 16,
-        }}
+      <View 
+        style={
+          [ styles.clinicalDataTableCell, styles.clinicalDataTableHeader, 
+            { 
+              flex: 1,
+              borderLeftWidth: 1,
+              borderRightWidth: 1,
+            }
+          ]
+        }
       >
-        Health Data
-      </Text>
-      <Text style={{ flex: 1, borderRightWidth: 1, fontSize: 16 }}>
-        Reading
-      </Text>
-      <Text style={{ flex: 1, borderRightWidth: 1, fontSize: 16 }}>
-        Date Time
-      </Text>
+        <Text>Health Data</Text>
+      </View>
+      
+      <View 
+        style={
+          [ styles.clinicalDataTableCell, styles.clinicalDataTableHeader, 
+            { 
+              flex: 1,
+              borderRightWidth: 1,
+            }
+          ]
+        }
+      >
+        <Text>Reading</Text>
+      </View>
+
+      <View 
+        style={
+          [ styles.clinicalDataTableCell, styles.clinicalDataTableHeader, 
+            { 
+              flex: 1,
+              borderRightWidth: 1,
+            }
+          ]
+        }
+      >
+        <Text>Date Time</Text>
+      </View>
     </View>
   );
 }
@@ -106,22 +138,32 @@ function ClinicalDataHeader() {
 function ClinicalDataRow({ dataType, reading, datetime }) {
   return (
     <View style={[styles.rowContainer, { borderBottomWidth: 1 }]}>
-      <Text style={{ flex: 1, borderLeftWidth: 1, borderRightWidth: 1 }}>
-        {dataType}
-      </Text>
-      <Text style={{ flex: 1, borderRightWidth: 1 }}>{reading}</Text>
-      <Text style={{ flex: 1, borderRightWidth: 1 }}>{datetime}</Text>
+      <View style={[styles.clinicalDataTableCell, { flex: 1, borderLeftWidth: 1, borderRightWidth: 1 }]}>
+        <Text>{dataType}</Text>
+      </View>
+      
+      <View style={[styles.clinicalDataTableCell, { flex: 1, borderRightWidth: 1 }]}>
+        <Text>{reading}</Text>
+      </View>
+
+      <View style={[styles.clinicalDataTableCell, { flex: 1, borderRightWidth: 1 }]}>
+        <Text>{datetime}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingTop: 60,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    paddingHorizontal: 5,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    fontSize: 20,
+    justifyContent: "flex-start",
+    fontSize: 14,
     paddingBottom: 20,
   },
   rowContainer: {
@@ -140,6 +182,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   patientPhoto: {
-    flex: 1,
+    height: 150,
+    width: 150,
   },
+  clinicalDataTableCell: {
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  clinicalDataTableHeader: {
+    fontSize: 20,
+  }
 });
