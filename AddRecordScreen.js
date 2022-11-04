@@ -7,6 +7,9 @@ import {
   Image,
   SafeAreaView,
 } from "react-native";
+import EndPointConfig from "./EndPointConfig";
+import * as DocumentPicker from "expo-document-picker";
+import * as FileSystem from "expo-file-system";
 
 export default function AddRecord() {
   const [name, setName] = useState("");
