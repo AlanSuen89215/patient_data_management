@@ -12,12 +12,12 @@ export default function LoginScreen({ navigation }) {
         <Image style={styles.photo} source={require("./assets/logo.jpg")} />
       </View>
       <View style={styles.columnContainer}>
-        <Text style={[styles.rowContainer ,styles.text]}> WeCare Elderly Home </Text>
+        <Text style={[styles.rowContainer ,styles.text]}> WeCare </Text>
         <Text style={[styles.rowContainer ,styles.text]}> Staff Portal</Text>
         <Text style={[styles.rowContainer ,styles.text]}>User</Text>
         <TextInput style={[styles.rowContainer ,styles.textInput]}></TextInput>
         <Text style={[styles.rowContainer ,styles.text]}>Password</Text>
-        <TextInput style={[styles.rowContainer ,styles.textInput]}></TextInput>
+        <TextInput style={[styles.rowContainer ,styles.textInput]} secureTextEntry={true}></TextInput>
         <View style={styles.rowContainer}>
           <Pressable style={styles.rowContainer} onPress={onBtnSignInPressed}>
             <Text style={[styles.text, {color: '#FFFFFF', backgroundColor: '#388E3C'}]}>Log In</Text>

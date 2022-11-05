@@ -87,10 +87,6 @@ function ListItem(props) {
         </View>
 
         <View style={[styles.rowContainer, {margin: 2}]}>
-          <Text style={{ fontSize: 11 }}>{props.item.timeOfTreatment} </Text>
-        </View>
-
-        <View style={[styles.rowContainer, {margin: 2}]}>
           <Text style={{ fontSize: 11 }}>{props.item.details} </Text>
         </View>
       </View>
