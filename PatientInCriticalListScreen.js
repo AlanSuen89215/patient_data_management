@@ -10,10 +10,6 @@ import {
 
 export default function PatientInCriticalListScreen() {
   let patientInCriticalListData = [
-    {
-      id: "1",
-      patientName: "Patient 1",
-    },
   ];
 
   return (

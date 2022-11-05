@@ -11,7 +11,7 @@ import DrawerItems from './DrawerItems';
 import DrawerHeader from './DrawerHeader';
 import PatientRecord from './PatientRecord'
 import AddRecordScreen  from './AddRecordScreen';
-//const Stack = createStackNavigator();
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {
@@ -117,21 +117,5 @@ export default function App() {
         }
       </Drawer.Navigator>
     </NavigationContainer>
-    
-
-
-
-
-
-
-    //<NavigationContainer>
-    //  <Stack.Navigator initialRouteName="Login">
-    //    <Stack.Screen name="Login" component={LoginScreen}/>
-    //    <Stack.Screen name="AddPatient" component={AddPatientScreen} options={{ title: 'Add Patient' }} />
-    //    <Stack.Screen name="ViewPatient" component={ViewPatientScreen} options={{ title: "Patient's profile" }} />
-    //    <Stack.Screen name="PatientList" component={PatientListScreen} options={{ title: "Patients" }} />
-    //    <Stack.Screen name="PatientInCriticalList" component={PatientInCriticalListScreen} options={{ title: "Patients in critical condition" }} />
-    //  </Stack.Navigator>
-    //</NavigationContainer>
   );
 }

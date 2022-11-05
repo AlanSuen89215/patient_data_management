@@ -20,10 +20,6 @@ export default function PatientListScreen({ navigation }) {
   };
 
   let patientListData = [
-    {
-      id: "1",
-      patientName: "Patient 1",
-    },
   ];
 
   return (

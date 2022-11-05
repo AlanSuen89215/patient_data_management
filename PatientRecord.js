@@ -12,34 +12,6 @@ import {
 
 export default function PatientRecord({navigation}) {
   let patientRecord = [
-    {
-      treatmentId: "1",
-      treatment: "take medicine",
-      dateOfTreatment: "11 Dec 2022",
-      timeOfTreatment: "1200",
-      details: "Advil 200mg",
-    },
-    {
-      treatmentId: "2",
-      treatment: "injection",
-      dateOfTreatment: "12 Nov 2022",
-      timeOfTreatment: "1703",
-      details: "Biontech",
-    },
-    {
-      treatmentId: "3",
-      treatment: "sugery",
-      dateOfTreatment: "13 Oct 2022",
-      timeOfTreatment: "0800",
-      details: "knee",
-    },
-    {
-      treatmentId: "4",
-      treatment: "doctor appointment",
-      dateOfTreatment: "14 Sep 2022",
-      timeOfTreatment: "1030",
-      details: "0",
-    },
   ];
   const onBtnReturnPressed = () => {
     navigation.navigate("ViewPatient");

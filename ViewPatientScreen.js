@@ -2,23 +2,21 @@ import React from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 
 export default function ViewPatientScreen({navigation}) {
-  const [photoDisplayed, setPhotoDisplayed] = React.useState(
-    require("./assets/logo.jpg")
-  )
-  const [patientData, setPatientData] = React.useState("Name: John Smith\nAge: 60\nDate of Birth: 1-1-1962\nSex: M\nTel: +1 416 442 4067\nRegister Address: \nG01, 937 Progress Ave, Centennial Place\nEmergency contact person:\nMichelle Elizabeth Rosen (+1 416 442 4068)\nDepartment: Normal\nDoctor: Alan Suen\nDate of Admission: 10-6-2022\nBed: 5A")
+  const [photoDisplayed, setPhotoDisplayed] = React.useState("")
+  const [patientData, setPatientData] = React.useState("")
 
   const bloodPressureTypeName = "BP (X/Y mmHg)";
-  const [bloodPressureReading, setBloodPressureReading] = React.useState("120")
-  const [bloodPressureDatetime, setBloodPressureDatetime] = React.useState("11-10-2022 10:00:00")
+  const [bloodPressureReading, setBloodPressureReading] = React.useState("")
+  const [bloodPressureDatetime, setBloodPressureDatetime] = React.useState("")
   const respiratoryRateTypeName = "PR (X/min)";
-  const [respiratoryRateReading, setRespiratoryRateReading] = React.useState("12")
-  const [respiratoryRateDatetime, setRespiratoryRateDatetime] = React.useState("11-10-2022 10:00:00")
+  const [respiratoryRateReading, setRespiratoryRateReading] = React.useState("")
+  const [respiratoryRateDatetime, setRespiratoryRateDatetime] = React.useState("")
   const bloodOxygenTypeName = "BO (X%)";
-  const [bloodOxygenReading, setBloodOxygenReading] = React.useState("95")
-  const [bloodOxygenDatetime, setBloodOxygenDatetime] = React.useState("11-10-2022 10:00:00")
+  const [bloodOxygenReading, setBloodOxygenReading] = React.useState("")
+  const [bloodOxygenDatetime, setBloodOxygenDatetime] = React.useState("")
   const heartBeatRateTypeName = "HB (X/min)";
-  const [heartBeatRateReading, setHeartBeatRateReading] = React.useState("80")
-  const [heartBeatRateDatetime, setHeartBeatRateDatetime] = React.useState("11-10-2022 10:00:00")
+  const [heartBeatRateReading, setHeartBeatRateReading] = React.useState("")
+  const [heartBeatRateDatetime, setHeartBeatRateDatetime] = React.useState("")
 
   const onBtnViewRecordsPressed = () => {
     navigation.navigate("PatientRecord");
