@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         width: 30
     },
     titleText: {
-        flex: 1,
+        flex: 2,
         justifyContent: 'center'
     }
 })

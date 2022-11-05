@@ -37,6 +37,62 @@ export default function App() {
     }
   }
 
+  const getDrawerDisplayedName = (name) => {
+    switch(name) {
+      case "Login":
+        return "Login"
+      case "AddPatient":
+        return "Add patient"
+      case "ViewPatient":
+        return "View Patient"
+      case "PatientList":
+        return "Patients"
+      case "PatientInCriticalList":
+        return "Critical"
+      case "PatientRecord":
+        return "Patient Record"
+        case "AddRecord":
+        return "Add record"
+      default:
+        return ""
+    }
+  }
+
+  const getScreenHeaderTitle = (name) => {
+    switch(name) {
+      case "Login":
+        return "Login"
+      case "AddPatient":
+        return "Add patient"
+      case "ViewPatient":
+        return "Patient's profile"
+      case "PatientList":
+        return "Patients"
+      case "PatientInCriticalList":
+        return "Patients in critical condition"
+      case "PatientRecord":
+        return "Patient Records"
+        case "AddRecord":
+        return "Add patient record"
+      default:
+        return ""
+    }
+  }
+
+  const getDrawerOption = (name) => {
+    return {
+      headerShown: true,
+      headerTitle: getScreenHeaderTitle(name),
+      header: (scene) => {
+        const title = scene.options.headerTitle
+        
+        return (
+          <DrawerHeader screen={title}/>
+        )
+      }
+    }
+  }
+
   return (
     <NavigationContainer>
      <Drawer.Navigator
@@ -52,19 +108,9 @@ export default function App() {
             drawer => 
               <Drawer.Screen 
                key = {drawer.name}
-               name = {drawer.name}
+               name = { getDrawerDisplayedName(drawer.name) }
                component = { getScreen(drawer.name) }
-               options = {{
-                 headerShown: true,
-                 header: (scene) => {
-                   //const descriptor = scene.descriptor
-                   const title = scene.route.name
-                   
-                   return (
-                     <DrawerHeader screen={title}/>
-                   )
-                 }
-               }}
+               options = { getDrawerOption(drawer.name) }
               />
           )
         }
