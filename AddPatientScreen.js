@@ -32,7 +32,7 @@ export default function AddPatientScreen({ navigation }) {
   const [doctor, setDoctor] = React.useState("");
   const [photo, setPhoto] = React.useState("");
   const [photoDisplayed, setPhotoDisplayed] = React.useState(
-    require("./assets/box-arrow-in-up.png")
+    require("./assets/text-upload-patient-photo.png")
   );
 
   const onPhotoPressed = async () => {

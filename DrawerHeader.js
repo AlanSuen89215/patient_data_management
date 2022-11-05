@@ -10,7 +10,7 @@ export default function DrawerHeader({ screen }) {
             <TouchableOpacity
                 style={styles.menuIconContainer}
                 onPress={ () => navigation.toggleDrawer() }>
-                <Image style={styles.menuIconImage} source={require('./assets/icon.png')} />
+                <Image style={styles.menuIconImage} source={require('./assets/menu-button-wide.png')} />
             </TouchableOpacity>
 
             <View style={styles.titleText}>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     },
     menuIconImage: {
         height: 30,
-        width:30
+        width: 30
     },
     titleText: {
         flex: 1,
