@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "left",
+    justifyContent: "flex-start",
     flex: 1,
   },
   columnContainer: {
