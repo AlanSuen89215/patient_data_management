@@ -83,6 +83,7 @@ export default function App() {
     return {
       headerShown: true,
       headerTitle: getScreenHeaderTitle(name),
+      title: getDrawerDisplayedName(name),
       header: (scene) => {
         const title = scene.options.headerTitle
         
@@ -107,8 +108,8 @@ export default function App() {
           DrawerItems.map(
             drawer => 
               <Drawer.Screen 
-               key = {drawer.name}
-               name = { getDrawerDisplayedName(drawer.name) }
+               key = { drawer.name }
+               name = { drawer.name }
                component = { getScreen(drawer.name) }
                options = { getDrawerOption(drawer.name) }
               />
