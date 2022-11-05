@@ -53,6 +53,38 @@ export default function AddPatientScreen({ navigation }) {
 
   // Send the data of the new patient to the server
   const onSubmitPress = async () => {
+    // validate the user entries
+    if (isNaN(age)) {
+      alert('Age is not valid')
+      return
+    }
+    if (isNaN(phoneNumber)) {
+      alert('Tel is not valid')
+      return
+    }
+    if (isNaN(emergencyContactPhoneNumber)) {
+      alert('Emergency contact person phone number is not valid')
+      return
+    }
+    let dateOfBirthSplited = dateOfBirth.split('/')
+    if (dateOfBirthSplited.length != 3
+      || isNaN(dateOfBirthSplited[0]) || parseInt(dateOfBirthSplited[0]) < 1 || parseInt(dateOfBirthSplited[0]) > 31 // check day
+      || isNaN(dateOfBirthSplited[1]) || parseInt(dateOfBirthSplited[1]) < 1 || parseInt(dateOfBirthSplited[1]) > 12 // check month
+      || isNaN(dateOfBirthSplited[2]) || parseInt(dateOfBirthSplited[2]) < 0 || parseInt(dateOfBirthSplited[2]) > 9999) // check year
+    {
+      alert('Date of birth is not valid')
+      return
+    }
+    let dateOfAdmissionSplited = dateOfAdmission.split('/')
+    if (dateOfAdmissionSplited.length != 3
+      || isNaN(dateOfAdmissionSplited[0]) || parseInt(dateOfAdmissionSplited[0]) < 1 || parseInt(dateOfAdmissionSplited[0]) > 31 // check day
+      || isNaN(dateOfAdmissionSplited[1]) || parseInt(dateOfAdmissionSplited[1]) < 1 || parseInt(dateOfAdmissionSplited[1]) > 12 // check month
+      || isNaN(dateOfAdmissionSplited[2]) || parseInt(dateOfAdmissionSplited[2]) < 0 || parseInt(dateOfAdmissionSplited[2]) > 9999) // check year
+    {
+      alert('Date of Admission is not valid')
+      return
+    }
+
     const addPatientParams = {
       first_name: firstName,
       last_name: lastName,
@@ -129,6 +161,7 @@ export default function AddPatientScreen({ navigation }) {
           style={[styles.textInput, { flex: 2 }]}
           onChangeText={(text) => setDateOfBirth(text)}
           value={dateOfBirth}
+          placeholder='dd/mm/yyyy'
         />
       </View>
 
@@ -211,6 +244,7 @@ export default function AddPatientScreen({ navigation }) {
           style={[styles.textInput, { flex: 2 }]}
           onChangeText={(text) => setDateOfAdmission(text)}
           value={dateOfAdmission}
+          placeholder='dd/mm/yyyy'
         />
         <Text style={[styles.text, { flex: 1 }]}>Bed:</Text>
         <TextInput
