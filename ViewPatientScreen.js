@@ -2,18 +2,23 @@ import React from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 
 export default function ViewPatientScreen({navigation}) {
+  const [photoDisplayed, setPhotoDisplayed] = React.useState(
+    require("./assets/logo.jpg")
+  )
+  const [patientData, setPatientData] = React.useState("Name: John Smith\nAge: 60\nDate of Birth: 1-1-1962\nSex: M\nTel: +1 416 442 4067\nRegister Address: \nG01, 937 Progress Ave, Centennial Place\nEmergency contact person:\nMichelle Elizabeth Rosen (+1 416 442 4068)\nDepartment: Normal\nDoctor: Alan Suen\nDate of Admission: 10-6-2022\nBed: 5A")
+
   const bloodPressureTypeName = "BP (X/Y mmHg)";
-  let bloodPressureReading = "";
-  let bloodPressureDatetime = "";
+  const [bloodPressureReading, setBloodPressureReading] = React.useState("")
+  const [bloodPressureDatetime, setBloodPressureDatetime] = React.useState("")
   const respiratoryRateTypeName = "PR (X/min)";
-  let respiratoryRateReading = "";
-  let respiratoryRateDatetime = "";
+  const [respiratoryRateReading, setRespiratoryRateReading] = React.useState("")
+  const [respiratoryRateDatetime, setRespiratoryRateDatetime] = React.useState("")
   const bloodOxygenTypeName = "BO (X%)";
-  let bloodOxygenReading = "";
-  let bloodOxygenDatetime = "";
+  const [bloodOxygenReading, setBloodOxygenReading] = React.useState("")
+  const [bloodOxygenDatetime, setBloodOxygenDatetime] = React.useState("")
   const heartBeatRateTypeName = "HB (X/min)";
-  let heartBeatRateReading = "";
-  let heartBeatRateDatetime = "";
+  const [heartBeatRateReading, setHeartBeatRateReading] = React.useState("")
+  const [heartBeatRateDatetime, setHeartBeatRateDatetime] = React.useState("")
 
   const onBtnViewRecordsPressed = () => {
     navigation.navigate("PatientRecord");
@@ -27,15 +32,15 @@ export default function ViewPatientScreen({navigation}) {
       <View style = {{ flex: 2, justifyContent: "center", alignItems: "center", margin: 5}}>
         <Image 
           style={styles.patientPhoto}
-          source={require("./assets/box-arrow-in-up.png")}
+          source={photoDisplayed}
         />
       </View>
 
-      <View style={styles.rowContainer}>
-        <Text styles={{ flex: 1, borderWidth: 1, fontSize: 14 }}></Text>
+      <View style={[styles.rowContainer, {flex: 3}]}>
+        <Text styles={{ flex: 1, borderWidth: 1, fontSize: 14 }}>{patientData}</Text>
       </View>
 
-      <View style={styles.columnContainer}>
+      <View style={[styles.columnContainer, {flex: 2}]}>
         <ClinicalDataHeader />
         <ClinicalDataRow
           dataType={bloodPressureTypeName}

@@ -84,6 +84,10 @@ export default function AddPatientScreen({ navigation }) {
       alert('Date of Admission is not valid')
       return
     }
+    if (photo === undefined || photo === null || photo === "") {
+      alert("Haven't select a patient photo for uploading")
+      return
+    }
 
     const addPatientParams = {
       first_name: firstName,
