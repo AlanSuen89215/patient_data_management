@@ -77,39 +77,50 @@ function ListItem(props) {
         borderWidth: 1,
       }}
     >
-      <View style={styles.rowContainer}>
-        <Text style={{ fontSize: 20 }}>{props.item.treatment}</Text>
-      </View>
+      <View style={styles.columnContainer}>
+        <View style={[styles.rowContainer, {margin: 2}]}>
+          <Text style={{ fontSize: 20 }}>{props.item.treatment}</Text>
+        </View>
 
-      <View style={styles.rowContainer}>
-        <Text style={{ fontSize: 15 }}>{props.item.dateOfTreatment} </Text>
-      </View>
+        <View style={[styles.rowContainer, {margin: 2}]}>
+          <Text style={{ fontSize: 15 }}>{props.item.dateOfTreatment} </Text>
+        </View>
 
-      <View style={styles.rowContainer}>
-        <Text style={{ fontSize: 11 }}>{props.item.timeOfTreatment} </Text>
-      </View>
+        <View style={[styles.rowContainer, {margin: 2}]}>
+          <Text style={{ fontSize: 11 }}>{props.item.timeOfTreatment} </Text>
+        </View>
 
-      <View style={styles.rowContainer}>
-        <Text style={{ fontSize: 11 }}>{props.item.details} </Text>
+        <View style={[styles.rowContainer, {margin: 2}]}>
+          <Text style={{ fontSize: 11 }}>{props.item.details} </Text>
+        </View>
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingTop: 60,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    paddingHorizontal: 5,
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "flex-start",
-    fontSize: 20,
-    padding: 5,
+    fontSize: 14,
+    paddingBottom: 20,
   },
   rowContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "left",
     flex: 1,
-    height: 100,
+  },
+  columnContainer: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    flex: 1,
   },
   text: {
     fontSize: 30,

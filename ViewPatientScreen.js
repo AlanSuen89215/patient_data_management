@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
-import AddRecord from "./AddRecordScreen";
 
 export default function ViewPatientScreen({navigation}) {
   const bloodPressureTypeName = "BP (X/Y mmHg)";
