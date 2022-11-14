@@ -9,6 +9,7 @@ import {
   FlatList,
   Pressable,
 } from "react-native";
+import EndPointConfig from "./EndPointConfig";
 
 export default function PatientListScreen({ navigation }) {
   const onBtnAddPatientPressed = () => {
@@ -21,6 +22,27 @@ export default function PatientListScreen({ navigation }) {
 
   let patientListData = [
   ];
+
+  // download patient list from server
+  fetch(EndPointConfig.urlListAllPatients)
+    .then(async (response) => {
+      const data = await response.json();
+      if (response.status == 200) {
+        for (let patient of data) {
+          patientListData.push({
+            patientName: patient.first_name + ' ' + patient.last_name,
+            id: patient._id
+          })
+        }
+      }
+      else {
+        console.error("Fail to download patient list")
+      }
+    })
+    .catch( (error) => {
+      // unknown error
+      console.error("Fail to download patient list. " + error);
+    })
 
   return (
     <View style={styles.container}>

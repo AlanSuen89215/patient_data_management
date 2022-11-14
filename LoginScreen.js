@@ -1,9 +1,49 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, TextInput, Image, Pressable } from "react-native";
+import EndPointConfig from "./EndPointConfig";
 
 export default function LoginScreen({ navigation }) {
-  const onBtnSignInPressed = () => {
-    navigation.navigate("PatientList");
+  const [user, setUser] = React.useState('')
+  const [password, setPassword] = React.useState('')
+
+  const onBtnSignInPressed = async () => {
+    // validate the user entries
+    if (user === undefined || user === null || user === "") {
+      alert('user is empty')
+      return
+    }
+    if (password === undefined || password === null || password === "") {
+      alert('password is empty')
+      return
+    }
+
+    const loginParams = {
+      user_name: user,
+      password: password
+    }
+    await fetch(EndPointConfig.urlLogin, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginParams)
+    })
+      .then(async (response) => {
+        let data = await response.json();
+        if (response.status == 200) {
+          // login success
+          navigation.navigate("PatientList");
+        }
+        else {
+          // server reject the login
+          alert("Fail to login")
+        }
+      })
+      .catch( (error) => {
+        // unknown error
+        console.error("Fail to login due to unknown error. " + error)
+        alert("Fail to login due to unknown error")
+      })
   };
 
   return (
@@ -15,9 +55,18 @@ export default function LoginScreen({ navigation }) {
         <Text style={[styles.rowContainer ,styles.text]}> WeCare </Text>
         <Text style={[styles.rowContainer ,styles.text]}> Staff Portal</Text>
         <Text style={[styles.rowContainer ,styles.text]}>User</Text>
-        <TextInput style={[styles.rowContainer ,styles.textInput]}></TextInput>
+        <TextInput 
+          style={[styles.rowContainer ,styles.textInput]}
+          onChangeText={(text) => setUser(text)}
+          value={user}
+        />
         <Text style={[styles.rowContainer ,styles.text]}>Password</Text>
-        <TextInput style={[styles.rowContainer ,styles.textInput]} secureTextEntry={true}></TextInput>
+        <TextInput
+          style={[styles.rowContainer ,styles.textInput]}
+          secureTextEntry={true}
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+        />
         <View style={styles.rowContainer}>
           <Pressable style={styles.rowContainer} onPress={onBtnSignInPressed}>
             <Text style={[styles.text, {color: '#FFFFFF', backgroundColor: '#388E3C'}]}>Log In</Text>

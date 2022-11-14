@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TextInput,
 } from "react-native";
+import EndPointConfig from "./EndPointConfig";
 
 export default function AddRecord({ navigation }) {
   const [id, setId] = React.useState("");
@@ -19,8 +20,60 @@ export default function AddRecord({ navigation }) {
   const onCancelPress = () => {
     navigation.navigate("ViewPatient");
   };
-  const onAddPress = () => {
-    navigation.navigate("PatientList");
+  const onAddPress = async () => {
+    // validate the user entries
+    if (id === undefined || id === null || id === "") {
+      alert('id is empty')
+      return
+    }
+    if (treatment === undefined || treatment === null || treatment === "") {
+      alert('treatment is empty')
+      return
+    }
+    let dateOfRecordSplited = dateOfRecord.split('/')
+    if (dateOfRecordSplited.length != 3
+      || isNaN(dateOfRecordSplited[0]) || parseInt(dateOfRecordSplited[0]) < 1 || parseInt(dateOfRecordSplited[0]) > 31 // check day
+      || isNaN(dateOfRecordSplited[1]) || parseInt(dateOfRecordSplited[1]) < 1 || parseInt(dateOfRecordSplited[1]) > 12 // check month
+      || isNaN(dateOfRecordSplited[2]) || parseInt(dateOfRecordSplited[2]) < 0 || parseInt(dateOfRecordSplited[2]) > 9999) // check year
+    {
+      alert('Date of record is not valid')
+      return
+    }
+    if (remark === undefined || remark === null || remark === "") {
+      alert('remark is empty')
+      return
+    }
+
+    const urlAddTreatmentRecord = EndPointConfig.urlAddTreatmentRecord.replace(':id', id)
+    const addTreatmentRecordParams = {
+      patient_id: id,
+      treatment: treatment,
+      date: dateOfRecord,
+      description: remark
+    }
+    await fetch(urlAddTreatmentRecord, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addTreatmentRecordParams)
+    })
+      .then(async (response) => {
+        let data = await response.json();
+        if (response.status == 201) {
+          // success to add treatment record in the server
+          navigation.navigate("PatientList");
+        }
+        else {
+          // server reject the adding treatment record request
+          alert(data.message); // display the server message of rejection
+        }
+      })
+      .catch( (error) => {
+        // unknown error
+        console.error("Fail to add treatment record due to unknown error. " + error);
+        alert("Fail to add treatment record due to unknown error");
+      })
   };
 
   return (

@@ -7,10 +7,32 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
+import EndPointConfig from "./EndPointConfig";
 
 export default function PatientInCriticalListScreen() {
   let patientInCriticalListData = [
   ];
+
+  // download list of patients who are in critical condition from server
+  fetch(EndPointConfig.urlListAllPatientsInCritical)
+    .then(async (response) => {
+      const data = await response.json();
+      if (response.status == 200) {
+        for (let patient of data) {
+          patientInCriticalListData.push({
+            patientName: patient.first_name + ' ' + patient.last_name,
+            id: patient.patient_id
+          })
+        }
+      }
+      else {
+        console.error("Fail to download list of patients who are in critical condition")
+      }
+    })
+    .catch( (error) => {
+      // unknown error
+      console.error("Fail to download list of patients who are in critical condition. " + error);
+    })
 
   return (
     <View style={styles.container}>
