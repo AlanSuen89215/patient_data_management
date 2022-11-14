@@ -12,7 +12,7 @@ import {
 import EndPointConfig from "./EndPointConfig";
 
 export default function PatientRecord({navigation, route}) {
-  const patientId = route.params?.patientId
+  const id = route.params?.id
 
   let patientRecord = [
   ];
@@ -21,7 +21,7 @@ export default function PatientRecord({navigation, route}) {
   };
 
   // download treatment records of the patient from server
-  const urlViewTreatmentRecordByPatientId = EndPointConfig.urlViewTreatmentRecordByPatientId.replace(':id', patientId)
+  const urlViewTreatmentRecordByPatientId = EndPointConfig.urlViewTreatmentRecordByPatientId.replace(':id', id)
   fetch(urlViewTreatmentRecordByPatientId)
     .then(async (response) => {
       const data = await response.json();

@@ -16,8 +16,8 @@ export default function PatientListScreen({ navigation }) {
     navigation.navigate("AddPatient");
   };
 
-  const onItemPressed = (patientName) => {
-    navigation.navigate("ViewPatient");
+  const onItemPressed = (patientId) => {
+    navigation.navigate("ViewPatient", { id: patientId });
   };
 
   let patientListData = [
@@ -66,6 +66,7 @@ export default function PatientListScreen({ navigation }) {
           data={patientListData}
           renderItem={({ item }) => (
             <Item
+              patientId = {item.id}
               patientName={item.patientName}
               onItemPressed={onItemPressed}
             />
@@ -77,12 +78,12 @@ export default function PatientListScreen({ navigation }) {
   );
 }
 
-function Item({ patientName, onItemPressed }) {
+function Item({ patientId, patientName, onItemPressed }) {
   return (
     <View
       style={styles.item}
       onStartShouldSetResponder={() => {
-        onItemPressed(patientName);
+        onItemPressed(patientId);
       }}
     >
       <Text style={styles.text}>{patientName}</Text>

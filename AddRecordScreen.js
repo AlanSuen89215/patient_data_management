@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import EndPointConfig from "./EndPointConfig";
 
-export default function AddRecord({ navigation }) {
-  const [id, setId] = React.useState("");
+export default function AddRecord({ navigation , route }) {
+  const [id, setId] = React.useState(route.params?.id);
   const [name, setName] = React.useState("");
   const [treatment, setTreatment] = React.useState("");
   const [dateOfRecord, setDateOfRecord] = React.useState("");

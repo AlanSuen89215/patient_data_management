@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Image } from "react-native";
 import EndPointConfig from "./EndPointConfig";
 
 export default function ViewPatientScreen({navigation, route}) {
-  const patientId = route.params?.patientId
+  const id = route.params?.id
   const [photoDisplayed, setPhotoDisplayed] = React.useState("")
   const [patientData, setPatientData] = React.useState("")
 
@@ -21,15 +21,15 @@ export default function ViewPatientScreen({navigation, route}) {
   const [heartBeatRateDatetime, setHeartBeatRateDatetime] = React.useState("")
 
   const onBtnViewRecordsPressed = () => {
-    navigation.navigate("PatientRecord");
+    navigation.navigate("PatientRecord", { id: id });
   };
   const onBtnAddRecordPressed = () => {
-    navigation.navigate("AddRecord");
+    navigation.navigate("AddRecord", { id: id });
     
   };
 
   // download patient info from server
-  const urlGetPatientById = EndPointConfig.urlGetPatientById.replace(":id", patientId)
+  const urlGetPatientById = EndPointConfig.urlGetPatientById.replace(":id", id)
   fetch(urlGetPatientById)
     .then(async (response) => {
       const data = await response.json();
@@ -68,7 +68,7 @@ export default function ViewPatientScreen({navigation, route}) {
     })
 
   // download patient clinical data from server
-  const urlGetClinicalDataById = EndPointConfig.urlGetClinicalDataById.replace(':id', patientId)
+  const urlGetClinicalDataById = EndPointConfig.urlGetClinicalDataById.replace(':id', id)
   fetch(urlGetClinicalDataById)
     .then( async (response) => {
       const data = await response.json();
