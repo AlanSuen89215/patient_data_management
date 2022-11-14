@@ -13,36 +13,39 @@ import EndPointConfig from "./EndPointConfig";
 
 export default function PatientRecord({navigation, route}) {
   const id = route.params?.id
+  const [patientRecord, setPatientRecord] = React.useState([]);
 
-  let patientRecord = [
-  ];
   const onBtnReturnPressed = () => {
     navigation.navigate("ViewPatient");
   };
 
-  // download treatment records of the patient from server
-  const urlViewTreatmentRecordByPatientId = EndPointConfig.urlViewTreatmentRecordByPatientId.replace(':id', id)
-  fetch(urlViewTreatmentRecordByPatientId)
-    .then(async (response) => {
-      const data = await response.json();
-      if (response.status == 200) {
-        for (let treatmentRecord of data) {
-          patientRecord.push({
-            treatmentId: treatmentRecord._id,
-            treatment: treatmentRecord.treatment,
-            dateOfTreatment: treatmentRecord.date,
-            details: treatmentRecord.description
-          })
-        }
-      }
-      else {
-        console.error("Fail to download treatment records")
-      }
-    })
-    .catch( (error) => {
-      // unknown error
-      console.error("Fail to download treatment records. " + error);
-    })
+  React.useEffect(() => {
+    // download treatment records of the patient from server
+    const urlViewTreatmentRecordByPatientId = EndPointConfig.urlViewTreatmentRecordByPatientId.replace(':id', id)
+      fetch(urlViewTreatmentRecordByPatientId)
+        .then(async (response) => {
+          const data = await response.json();
+          if (response.status == 200) {
+            let listContent = []
+            for (let treatmentRecord of data) {
+              listContent.push({
+                treatmentId: treatmentRecord._id,
+                treatment: treatmentRecord.treatment,
+                dateOfTreatment: treatmentRecord.date,
+                details: treatmentRecord.description
+              })
+            }
+            setPatientRecord(listContent)
+          }
+          else {
+            console.error("Fail to download treatment records")
+          }
+        })
+        .catch( (error) => {
+          // unknown error
+          console.error("Fail to download treatment records. " + error);
+        })
+  }, [])
 
   return (
     <View style={styles.container}>

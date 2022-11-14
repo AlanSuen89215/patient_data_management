@@ -29,9 +29,9 @@ export default function LoginScreen({ navigation }) {
       body: JSON.stringify(loginParams)
     })
       .then(async (response) => {
-        let data = await response.json();
         if (response.status == 200) {
           // login success
+          let data = await response.json()
           navigation.navigate("PatientList");
         }
         else {

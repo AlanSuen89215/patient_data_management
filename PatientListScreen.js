@@ -12,6 +12,7 @@ import {
 import EndPointConfig from "./EndPointConfig";
 
 export default function PatientListScreen({ navigation }) {
+  const [patientListData, setPatientListData] = React.useState([]);
   const onBtnAddPatientPressed = () => {
     navigation.navigate("AddPatient");
   };
@@ -20,29 +21,30 @@ export default function PatientListScreen({ navigation }) {
     navigation.navigate("ViewPatient", { id: patientId });
   };
 
-  let patientListData = [
-  ];
-
-  // download patient list from server
-  fetch(EndPointConfig.urlListAllPatients)
-    .then(async (response) => {
-      const data = await response.json();
-      if (response.status == 200) {
-        for (let patient of data) {
-          patientListData.push({
-            patientName: patient.first_name + ' ' + patient.last_name,
-            id: patient._id
-          })
+  React.useEffect(() => {
+    // download patient list from server
+    fetch(EndPointConfig.urlListAllPatients)
+      .then(async (response) => {
+        const data = await response.json();
+        if (response.status == 200) {
+          let listContent = []
+          for (let patient of data) {
+            listContent.push({
+              patientName: patient.first_name + ' ' + patient.last_name,
+              id: patient._id
+            })
+          }
+          setPatientListData(listContent)
         }
-      }
-      else {
-        console.error("Fail to download patient list")
-      }
-    })
-    .catch( (error) => {
-      // unknown error
-      console.error("Fail to download patient list. " + error);
-    })
+        else {
+          console.error("Fail to download patient list")
+        }
+      })
+      .catch( (error) => {
+        // unknown error
+        console.error("Fail to download patient list. " + error);
+      })
+  }, [])
 
   return (
     <View style={styles.container}>

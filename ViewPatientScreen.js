@@ -28,87 +28,89 @@ export default function ViewPatientScreen({navigation, route}) {
     
   };
 
-  // download patient info from server
-  const urlGetPatientById = EndPointConfig.urlGetPatientById.replace(":id", id)
-  fetch(urlGetPatientById)
-    .then(async (response) => {
-      const data = await response.json();
-      if (response.status == 200) {
-        // calculate age
-        const yearOfBirth = Number(data.date_of_birth.split('/')[2])
-        const curDate = new Date()
-        const age = curDate.getFullYear() - yearOfBirth
+  React.useEffect(() => {
+    // download patient info from server
+    const urlGetPatientById = EndPointConfig.urlGetPatientById.replace(":id", id)
+    fetch(urlGetPatientById)
+      .then(async (response) => {
+        const data = await response.json();
+        if (response.status == 200) {
+          // calculate age
+          const yearOfBirth = Number(data.date_of_birth.split('/')[2])
+          const curDate = new Date()
+          const age = curDate.getFullYear() - yearOfBirth
 
-        const patientDataTemp = 'ID: ' + data._id + '\n'
-          + 'Name: ' + data.first_name + ' ' + data.last_name + '\n'
-          + 'Age: ' + age + '\n'
-          + 'Date of birth: ' + data.date_of_birth + '\n'
-          + 'Sex: ' + data.sex + '\n'
-          + 'Tel: ' + data.phone_number + '\n'
-          + 'Register Address:\n'
-          + data.address + '\n'
-          + 'Emergency contact person:\n'
-          + data.emergency_contact_first_name + ' ' + data.emergency_contact_last_name
-          + ' (' + data.emergency_contact_phone_number + ')\n'
-          + 'Department: ' + data.department + '\n'
-          + 'Doctor: ' + data.doctor + '\n'
-          + 'Date of admission: ' + data.date_of_admission + '\n'
-          + 'Bed: ' + data.bed_number
-        
-          setPatientData(patientDataTemp)
-          setPhotoDisplayed(data.photo)
-      }
-      else {
-        console.error("Fail to download patients' information")
-      }
-    })
-    .catch( (error) => {
-      // unknown error
-      console.error("Fail to download patients' information. " + error);
-    })
+          const patientDataTemp = 'ID: ' + data._id + '\n'
+            + 'Name: ' + data.first_name + ' ' + data.last_name + '\n'
+            + 'Age: ' + age + '\n'
+            + 'Date of birth: ' + data.date_of_birth + '\n'
+            + 'Sex: ' + data.sex + '\n'
+            + 'Tel: ' + data.phone_number + '\n'
+            + 'Register Address:\n'
+            + data.address + '\n'
+            + 'Emergency contact person:\n'
+            + data.emergency_contact_first_name + ' ' + data.emergency_contact_last_name
+            + ' (' + data.emergency_contact_phone_number + ')\n'
+            + 'Department: ' + data.department + '\n'
+            + 'Doctor: ' + data.doctor + '\n'
+            + 'Date of admission: ' + data.date_of_admission + '\n'
+            + 'Bed: ' + data.bed_number
+          
+            setPatientData(patientDataTemp)
+            setPhotoDisplayed(data.photo)
+        }
+        else {
+          console.error("Fail to download patients' information")
+        }
+      })
+      .catch( (error) => {
+        // unknown error
+        console.error("Fail to download patients' information. " + error);
+      })
 
-  // download patient clinical data from server
-  const urlGetClinicalDataById = EndPointConfig.urlGetClinicalDataById.replace(':id', id)
-  fetch(urlGetClinicalDataById)
-    .then( async (response) => {
-      const data = await response.json();
-      if (response.status == 200) {
-        for (let clinicalData of data) {
-          switch (clinicalData.category) {
-            case 'Blood pressure':
-              // use diastolic pressure as blood pressure
-              setBloodPressureReading(clinicalData.readings.diastolic)
-              setBloodPressureDatetime(clinicalData.date + ' ' + clinicalData.time)
-              break
+    // download patient clinical data from server
+    const urlGetClinicalDataById = EndPointConfig.urlGetClinicalDataById.replace(':id', id)
+    fetch(urlGetClinicalDataById)
+      .then( async (response) => {
+        const data = await response.json();
+        if (response.status == 200) {
+          for (let clinicalData of data) {
+            switch (clinicalData.category) {
+              case 'Blood pressure':
+                // use diastolic pressure as blood pressure
+                setBloodPressureReading(clinicalData.readings.diastolic)
+                setBloodPressureDatetime(clinicalData.date + ' ' + clinicalData.time)
+                break
 
-            case 'Respiratory rate':
-              setRespiratoryRateReading(clinicalData.readings)
-              setRespiratoryRateDatetime(clinicalData.date + ' ' + clinicalData.time)
-              break
+              case 'Respiratory rate':
+                setRespiratoryRateReading(clinicalData.readings)
+                setRespiratoryRateDatetime(clinicalData.date + ' ' + clinicalData.time)
+                break
 
-            case 'Blood oxygen level':
-              setBloodOxygenReading(clinicalData.readings)
-              setBloodOxygenDatetime(clinicalData.date + ' ' + clinicalData.time)
-              break
+              case 'Blood oxygen level':
+                setBloodOxygenReading(clinicalData.readings)
+                setBloodOxygenDatetime(clinicalData.date + ' ' + clinicalData.time)
+                break
 
-            case 'Heart beat rate':
-              setHeartBeatRateReading(clinicalData.readings)
-              setHeartBeatRateDatetime(clinicalData.date + ' ' + clinicalData.time)
-              break
+              case 'Heart beat rate':
+                setHeartBeatRateReading(clinicalData.readings)
+                setHeartBeatRateDatetime(clinicalData.date + ' ' + clinicalData.time)
+                break
 
-            default:
-              break
+              default:
+                break
+            }
           }
         }
-      }
-      else {
-        console.error("Fail to download patients' clinical data")
-      }
-    })
-    .catch( (error) => {
-      // unknown error
-      console.error("Fail to download patients' clinical data. " + error);
-    })
+        else {
+          console.error("Fail to download patients' clinical data")
+        }
+      })
+      .catch( (error) => {
+        // unknown error
+        console.error("Fail to download patients' clinical data. " + error);
+      })
+  }, [])
 
   return (
     <View style={styles.container}>
