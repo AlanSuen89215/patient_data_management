@@ -12,7 +12,6 @@ import EndPointConfig from "./EndPointConfig";
 
 export default function AddRecord({ navigation , route }) {
   const [id, setId] = React.useState(route.params?.id);
-  const [name, setName] = React.useState("");
   const [treatment, setTreatment] = React.useState("");
   const [dateOfRecord, setDateOfRecord] = React.useState("");
   const [remark, setRemark] = React.useState("");
@@ -84,15 +83,6 @@ export default function AddRecord({ navigation , route }) {
           style={[styles.textInput, { flex: 2.5 }]}
           onChangeText={(text) => setId(text)}
           value={id}
-        />
-      </View>
-
-      <View style={styles.rowContainer}>
-        <Text style={[styles.text, { flex: 1 }]}>Patient Name:</Text>
-        <TextInput
-          style={[styles.textInput, { flex: 2.5 }]}
-          onChangeText={(text) => setName(text)}
-          value={name}
         />
       </View>
 
