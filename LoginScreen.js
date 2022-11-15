@@ -1,10 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, TextInput, Image, Pressable } from "react-native";
-import EndPointConfig from "./EndPointConfig";
-import AuthContext from "./AuthContext";
+import AuthInfo from "./AuthInfo";
 
 export default function LoginScreen({ navigation }) {
-  const { signIn } = React.useContext(AuthContext)
+  const { signIn } = React.useContext(AuthInfo.AuthContext)
   const [user, setUser] = React.useState('')
   const [password, setPassword] = React.useState('')
 
@@ -19,33 +18,7 @@ export default function LoginScreen({ navigation }) {
       return
     }
 
-    const loginParams = {
-      user_name: user,
-      password: password
-    }
-    await fetch(EndPointConfig.urlLogin, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginParams)
-    })
-      .then(async (response) => {
-        if (response.status == 200) {
-          // login success
-          let data = await response.json()
-          signIn()
-        }
-        else {
-          // server reject the login
-          alert("Fail to login")
-        }
-      })
-      .catch( (error) => {
-        // unknown error
-        console.error("Fail to login due to unknown error. " + error)
-        alert("Fail to login due to unknown error")
-      })
+    signIn(user, password)
   };
 
   return (

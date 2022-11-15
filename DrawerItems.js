@@ -6,7 +6,31 @@ import {
 } from './NavigationStacks'
 
 export default {
-  DoctorAndNurseItems: [
+  doctor: [
+    {
+      name: "PatientListStack",
+      component: PatientListStackScreen,
+      displayedName: 'Patients'
+    },
+    {
+      name: "PatientInCriticalListStack",
+      component: PatientInCriticalListStackScreen,
+      displayedName: 'Critical'
+    }
+  ],
+  nurse: [
+    {
+      name: "PatientListStack",
+      component: PatientListStackScreen,
+      displayedName: 'Patients'
+    },
+    {
+      name: "PatientInCriticalListStack",
+      component: PatientInCriticalListStackScreen,
+      displayedName: 'Critical'
+    }
+  ],
+  admin: [
     {
       name: "PatientListStack",
       component: PatientListStackScreen,
@@ -16,16 +40,6 @@ export default {
       name: "AddPatientStack",
       component: AddPatientStackScreen,
       displayedName: 'Add patient'
-    },
-    {
-      name: "PatientInCriticalListStack",
-      component: PatientInCriticalListStackScreen,
-      displayedName: 'Critical'
-    },
-    { 
-      name: "AddRecordStack",
-      component: AddRecordStackScreen,
-      displayedName: 'Add record'
-    },
+    }
   ]
 }

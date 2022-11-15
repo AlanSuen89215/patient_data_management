@@ -30,6 +30,12 @@ export function PatientListStackScreen() {
         component={PatientRecord}
         options={{ title: 'Patient Records' }}
       />
+
+      <PatientListStack.Screen
+        name="AddRecord"
+        component={AddRecordScreen}
+        options={{ title: 'Add patient record' }}
+      />
     </PatientListStack.Navigator>
   )
 }
@@ -61,20 +67,5 @@ export function PatientInCriticalListStackScreen() {
         options={{ title: 'Patients in critical condition' }}
       />
     </PatientInCriticalListStack.Navigator>
-  )
-}
-
-const AddRecordStack = createStackNavigator()
-export function AddRecordStackScreen() {
-  return (
-    <AddRecordStack.Navigator
-      initialRouteName="AddRecord"
-    >
-      <AddRecordStack.Screen
-        name="AddRecord"
-        component={AddRecordScreen}
-        options={{ title: 'Add patient record' }}
-      />
-    </AddRecordStack.Navigator>
   )
 }

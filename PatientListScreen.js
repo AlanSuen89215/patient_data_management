@@ -10,6 +10,7 @@ import {
   Pressable,
 } from "react-native";
 import EndPointConfig from "./EndPointConfig";
+import AuthInfo from "./AuthInfo";
 
 export default function PatientListScreen({ navigation }) {
   const [patientListData, setPatientListData] = React.useState([]);
@@ -53,14 +54,18 @@ export default function PatientListScreen({ navigation }) {
           style={styles.searchBox}
           placeholder="Search patients"
         ></TextInput>
-        
-        <Pressable
-          style={styles.btnAddPatient}
-          color="#841584"
-          onPress={onBtnAddPatientPressed}
-        >
-          <Text style={styles.add}>➕</Text>
-        </Pressable>
+        {
+          AuthInfo.userType == "admin" ?
+            <Pressable
+              style={styles.btnAddPatient}
+              color="#841584"
+              onPress={onBtnAddPatientPressed}
+            >
+              <Text style={styles.add}>➕</Text>
+            </Pressable>
+          :
+          <></>
+        }
       </View>
 
       <SafeAreaView style={styles.rowContainer}>
