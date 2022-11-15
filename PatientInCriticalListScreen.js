@@ -9,8 +9,17 @@ import {
 } from "react-native";
 import EndPointConfig from "./EndPointConfig";
 
-export default function PatientInCriticalListScreen() {
+export default function PatientInCriticalListScreen({ navigation }) {
   const [patientInCriticalListData, setPatientInCriticalListData] = React.useState([]);
+
+  const onItemPressed = (patientId) => {
+    navigation.navigate("PatientListStack", 
+      {
+        screen: 'ViewPatient', 
+        params: {id: patientId} 
+      }
+    );
+  };
 
   React.useEffect(() => {
     // download list of patients who are in critical condition from server
@@ -49,7 +58,13 @@ export default function PatientInCriticalListScreen() {
       <SafeAreaView style={styles.rowContainer}>
         <FlatList
           data={patientInCriticalListData}
-          renderItem={({ item }) => <Item patientName={item.patientName} />}
+          renderItem={({ item }) => 
+            <Item
+              patientId = {item.id}
+              patientName={item.patientName}
+              onItemPressed={onItemPressed}
+            />
+          }
           keyExtractor={(item) => item.id}
         />
       </SafeAreaView>
@@ -57,9 +72,14 @@ export default function PatientInCriticalListScreen() {
   );
 }
 
-function Item({ patientName }) {
+function Item({ patientId, patientName, onItemPressed }) {
   return (
-    <View style={styles.item}>
+    <View
+      style = {styles.item}
+      onStartShouldSetResponder = { () => {
+        onItemPressed(patientId);
+      }}
+    >
       <Text style={styles.text} >{patientName}</Text>
     </View>
   );
