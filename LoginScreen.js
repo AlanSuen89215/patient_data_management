@@ -1,8 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, TextInput, Image, Pressable } from "react-native";
 import EndPointConfig from "./EndPointConfig";
+import AuthContext from "./AuthContext";
 
 export default function LoginScreen({ navigation }) {
+  const { signIn } = React.useContext(AuthContext)
   const [user, setUser] = React.useState('')
   const [password, setPassword] = React.useState('')
 
@@ -32,7 +34,7 @@ export default function LoginScreen({ navigation }) {
         if (response.status == 200) {
           // login success
           let data = await response.json()
-          navigation.navigate("PatientList");
+          signIn()
         }
         else {
           // server reject the login

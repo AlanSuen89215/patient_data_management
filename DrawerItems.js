@@ -1,20 +1,18 @@
-export default [
-  {
-    name: "Login",
-  },
-  {
-    name: "AddPatient",
-  },
-  {
-    name: "ViewPatient",
-  },
-  {
-    name: "PatientList",
-  },
-  {
-    name: "PatientInCriticalList",
-  },
-  { name: "PatientRecord" },
-
-  { name: "AddRecord" },
-];
+export default {
+  DoctorAndNurseItems: [
+    {
+      name: "PatientList",
+    },
+    {
+      name: "AddPatient",
+    },
+    {
+      name: "ViewPatient",
+    },
+    {
+      name: "PatientInCriticalList",
+    },
+    { name: "PatientRecord" },
+    { name: "AddRecord" },
+  ]
+}

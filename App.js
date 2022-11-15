@@ -11,10 +11,29 @@ import DrawerItems from './DrawerItems';
 import DrawerHeader from './DrawerHeader';
 import PatientRecord from './PatientRecord'
 import AddRecordScreen  from './AddRecordScreen';
+import AuthContext from './AuthContext';
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+  const [state, dispatch] = React.useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignedIn: true
+          }
+      }
+    },
+    {
+      isSignedIn: false
+    }
+  )
+
+  const authContext = React.useMemo( () => ({
+    signIn: () => dispatch({ type: 'SIGN_IN' })
+  }), [])
 
   const getScreen = (name) => {
     switch(name) {
@@ -95,27 +114,36 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-     <Drawer.Navigator
-        drawerType = "front"
-        initialRouteName = "Login"
-        screenOptions = {{
-          activeTintColor: '#e91e63',
-          itemStyle: { marginVertical: 10 }
-        }}
-      >
-        {
-          DrawerItems.map(
-            drawer => 
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        <Drawer.Navigator
+          drawerType = "front"
+          screenOptions = {{
+            activeTintColor: '#e91e63',
+            itemStyle: { marginVertical: 10 }
+          }}
+        >
+          {
+            state.isSignedIn ?
+              DrawerItems.DoctorAndNurseItems.map(
+                drawer => 
+                  <Drawer.Screen 
+                    key = { drawer.name }
+                    name = { drawer.name }
+                    component = { getScreen(drawer.name) }
+                    options = { getDrawerOption(drawer.name) }
+                  />
+              )
+            :
               <Drawer.Screen 
-               key = { drawer.name }
-               name = { drawer.name }
-               component = { getScreen(drawer.name) }
-               options = { getDrawerOption(drawer.name) }
+                key = { 'Login' }
+                name = { 'Login' }
+                component = { getScreen('Login') }
+                options = { getDrawerOption('Login') }
               />
-          )
-        }
-      </Drawer.Navigator>
-    </NavigationContainer>
+          }
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
