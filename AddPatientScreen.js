@@ -48,7 +48,7 @@ export default function AddPatientScreen({ navigation }) {
   };
 
   const onCancelPress = () => {
-    navigation.navigate("PatientList");
+    navigation.goBack()
   };
 
   // Send the data of the new patient to the server
@@ -116,7 +116,7 @@ export default function AddPatientScreen({ navigation }) {
         let data = await response.json();
         if (response.status == 201) {
           // success to add a patient in the server
-          navigation.navigate("PatientList"); // navigate to the patient list screen
+          navigation.goBack(); // navigate back to the patient list screen
         } else {
           // server reject the adding patient request
           alert(data.message); // display the server message of rejection

@@ -16,7 +16,7 @@ export default function PatientRecord({navigation, route}) {
   const [patientRecord, setPatientRecord] = React.useState([]);
 
   const onBtnReturnPressed = () => {
-    navigation.navigate("ViewPatient");
+    navigation.goBack();
   };
 
   React.useEffect(() => {

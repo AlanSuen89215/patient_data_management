@@ -49,7 +49,8 @@ export default function App() {
           drawerType = "front"
           screenOptions = {{
             activeTintColor: '#e91e63',
-            itemStyle: { marginVertical: 10 }
+            itemStyle: { marginVertical: 10 },
+            unmountOnBlur: true
           }}
         >
           {

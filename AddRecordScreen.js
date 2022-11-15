@@ -18,7 +18,7 @@ export default function AddRecord({ navigation , route }) {
   const [remark, setRemark] = React.useState("");
 
   const onCancelPress = () => {
-    navigation.navigate("ViewPatient");
+    navigation.goBack();
   };
   const onAddPress = async () => {
     // validate the user entries
@@ -62,7 +62,7 @@ export default function AddRecord({ navigation , route }) {
         let data = await response.json();
         if (response.status == 201) {
           // success to add treatment record in the server
-          navigation.navigate("PatientList");
+          navigation.goBack();
         }
         else {
           // server reject the adding treatment record request
