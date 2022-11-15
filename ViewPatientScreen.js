@@ -58,7 +58,7 @@ export default function ViewPatientScreen({navigation, route}) {
             + 'Bed: ' + data.bed_number
           
             setPatientData(patientDataTemp)
-            setPhotoDisplayed(data.photo)
+            setPhotoDisplayed( {uri: data.photo })
         }
         else {
           console.error("Fail to download patients' information")
@@ -152,7 +152,7 @@ export default function ViewPatientScreen({navigation, route}) {
 
       {
         AuthInfo.userType != "admin" ?
-          <View style={[styles.rowContainer, {flex: 2}]}>
+          <View style={[styles.rowContainer, {flex: 1}]}>
             <View style={{ flex: 0.1 }} />
             <View style={{ flex: 1, marginRight:5 }}>
               <Button
