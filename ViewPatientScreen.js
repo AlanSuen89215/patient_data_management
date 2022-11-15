@@ -24,7 +24,7 @@ export default function ViewPatientScreen({navigation, route}) {
     navigation.navigate("PatientRecord", { id: id });
   };
   const onBtnAddRecordPressed = () => {
-    navigation.navigate("AddRecord", { id: id });
+    navigation.navigate("AddRecordStack", { id: id });
     
   };
 

@@ -1,18 +1,31 @@
+import {
+  PatientListStackScreen, 
+  AddPatientStackScreen,
+  PatientInCriticalListStackScreen,
+  AddRecordStackScreen
+} from './NavigationStacks'
+
 export default {
   DoctorAndNurseItems: [
     {
-      name: "PatientList",
+      name: "PatientListStack",
+      component: PatientListStackScreen,
+      displayedName: 'Patients'
     },
     {
-      name: "AddPatient",
+      name: "AddPatientStack",
+      component: AddPatientStackScreen,
+      displayedName: 'Add patient'
     },
     {
-      name: "ViewPatient",
+      name: "PatientInCriticalListStack",
+      component: PatientInCriticalListStackScreen,
+      displayedName: 'Critical'
     },
-    {
-      name: "PatientInCriticalList",
+    { 
+      name: "AddRecordStack",
+      component: AddRecordStackScreen,
+      displayedName: 'Add record'
     },
-    { name: "PatientRecord" },
-    { name: "AddRecord" },
   ]
 }

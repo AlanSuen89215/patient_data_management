@@ -12,10 +12,6 @@ export default function DrawerHeader({ screen }) {
                 onPress={ () => navigation.toggleDrawer() }>
                 <Image style={styles.menuIconImage} source={require('./assets/menu-button-wide.png')} />
             </TouchableOpacity>
-
-            <View style={styles.titleText}>
-                <Text >{screen}</Text>
-            </View>
         </View>
     )
 }
@@ -25,7 +21,7 @@ const styles = StyleSheet.create({
         position:'absolute',
         top:30,
         left:0,
-        width:'100%',
+        width: 30,
         height:30,
         backgroundColor:'#BDBDBD',
         flexDirection:'row',

@@ -14,7 +14,7 @@ import EndPointConfig from "./EndPointConfig";
 export default function PatientListScreen({ navigation }) {
   const [patientListData, setPatientListData] = React.useState([]);
   const onBtnAddPatientPressed = () => {
-    navigation.navigate("AddPatient");
+    navigation.navigate("AddPatientStack");
   };
 
   const onItemPressed = (patientId) => {
