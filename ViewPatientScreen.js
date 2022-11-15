@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import EndPointConfig from "./EndPointConfig";
+import AuthInfo from "./AuthInfo";
 
 export default function ViewPatientScreen({navigation, route}) {
   const id = route.params?.id
@@ -149,27 +150,32 @@ export default function ViewPatientScreen({navigation, route}) {
         />
       </View>
 
-      <View style={[styles.rowContainer, {flex: 2}]}>
-        <Text style={{ flex: 0.1 }} />
-        <View style={{ flex: 1, marginRight:5 }}>
-          <Button
-            title="View records"
-            style={{ flex: 1 }}
-            color="#4CAF50"
-            onPress={onBtnViewRecordsPressed}
-          />
-        </View>
-        
-        <View style={{ flex: 1, marginLeft:5 }}>
-          <Button
-            title="Add Record"
-            style={{ flex: 1 }}
-            color="#4CAF50"
-            onPress={onBtnAddRecordPressed}
-          />
-        </View>
-        <Text style={{ flex: 0.1 }} />
-      </View>
+      {
+        AuthInfo.userType != "admin" ?
+          <View style={[styles.rowContainer, {flex: 2}]}>
+            <View style={{ flex: 0.1 }} />
+            <View style={{ flex: 1, marginRight:5 }}>
+              <Button
+                title="View records"
+                style={{ flex: 1 }}
+                color="#4CAF50"
+                onPress={onBtnViewRecordsPressed}
+              />
+            </View>
+            
+            <View style={{ flex: 1, marginLeft:5 }}>
+              <Button
+                title="Add Record"
+                style={{ flex: 1 }}
+                color="#4CAF50"
+                onPress={onBtnAddRecordPressed}
+              />
+            </View>
+            <View style={{ flex: 0.1 }} />
+          </View>
+        :
+        <></>
+      }
     </View>
   );
 }
