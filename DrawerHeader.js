@@ -19,7 +19,7 @@ export default function DrawerHeader({ screen }) {
 const styles = StyleSheet.create({
     container: {
         position:'absolute',
-        top:30,
+        top:60,
         left:0,
         width: 30,
         height:30,
