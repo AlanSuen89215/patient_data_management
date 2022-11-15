@@ -10,7 +10,23 @@ import {
 import EndPointConfig from "./EndPointConfig";
 
 export default function PatientInCriticalListScreen({ navigation }) {
-  const [patientInCriticalListData, setPatientInCriticalListData] = React.useState([]);
+  const [displayedList, setdisplayedList] = React.useState([]);
+  const [patientInCriticalList, setPatientInCriticalList] = React.useState([]);
+
+  const searchPatient = (name) => {
+    if (name == "") {
+      setdisplayedList(patientInCriticalList)
+    }
+    else {
+      let resultList = []
+      for (let patient of patientInCriticalList) {
+        if (patient.patientName.includes(name)) {
+          resultList.push(patient)
+        }
+      }
+      setdisplayedList(resultList)
+    }
+  }
 
   const onItemPressed = (patientId) => {
     navigation.navigate("PatientListStack", 
@@ -34,7 +50,8 @@ export default function PatientInCriticalListScreen({ navigation }) {
               id: patient.patient_id
             })
           }
-          setPatientInCriticalListData(listContent)
+          setPatientInCriticalList(listContent)
+          setdisplayedList(listContent)
         }
         else {
           console.error("Fail to download list of patients who are in critical condition")
@@ -52,12 +69,13 @@ export default function PatientInCriticalListScreen({ navigation }) {
         <TextInput
           style={styles.searchBox}
           placeholder="Search patients"
+          onChangeText={(text) => searchPatient(text)}
         ></TextInput>
       </View>
 
       <SafeAreaView style={styles.rowContainer}>
         <FlatList
-          data={patientInCriticalListData}
+          data={displayedList}
           renderItem={({ item }) => 
             <Item
               patientId = {item.id}

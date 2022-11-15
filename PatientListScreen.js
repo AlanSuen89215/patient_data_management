@@ -13,7 +13,9 @@ import EndPointConfig from "./EndPointConfig";
 import AuthInfo from "./AuthInfo";
 
 export default function PatientListScreen({ navigation }) {
-  const [patientListData, setPatientListData] = React.useState([]);
+  const [displayedList, setdisplayedList] = React.useState([]);
+  const [patientList, setPatientList] = React.useState([]);
+
   const onBtnAddPatientPressed = () => {
     navigation.navigate("AddPatientStack");
   };
@@ -21,6 +23,21 @@ export default function PatientListScreen({ navigation }) {
   const onItemPressed = (patientId) => {
     navigation.navigate("ViewPatient", { id: patientId });
   };
+
+  const searchPatient = (name) => {
+    if (name == "") {
+      setdisplayedList(patientList)
+    }
+    else {
+      let resultList = []
+      for (let patient of patientList) {
+        if (patient.patientName.includes(name)) {
+          resultList.push(patient)
+        }
+      }
+      setdisplayedList(resultList)
+    }
+  }
 
   React.useEffect(() => {
     // download patient list from server
@@ -35,7 +52,8 @@ export default function PatientListScreen({ navigation }) {
               id: patient._id
             })
           }
-          setPatientListData(listContent)
+          setPatientList(listContent)
+          setdisplayedList(listContent)
         }
         else {
           console.error("Fail to download patient list")
@@ -53,6 +71,7 @@ export default function PatientListScreen({ navigation }) {
         <TextInput
           style={styles.searchBox}
           placeholder="Search patients"
+          onChangeText={(text) => searchPatient(text)}
         ></TextInput>
         {
           AuthInfo.userType == "admin" ?
@@ -70,7 +89,7 @@ export default function PatientListScreen({ navigation }) {
 
       <SafeAreaView style={styles.rowContainer}>
         <FlatList
-          data={patientListData}
+          data={displayedList}
           renderItem={({ item }) => (
             <Item
               patientId = {item.id}
