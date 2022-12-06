@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  KeyboardAvoidingView
 } from "react-native";
 import EndPointConfig from "./EndPointConfig";
 import * as DocumentPicker from "expo-document-picker";
@@ -130,7 +131,9 @@ export default function AddPatientScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}>
       <TouchableOpacity
         style={{ flex: 8, justifyContent: "center", alignItems: "center", margin: 5}}
         onPress={onPhotoPressed}
@@ -280,7 +283,7 @@ export default function AddPatientScreen({ navigation }) {
         <Text style={{ flex: 0.1 }} />
       </View>
 
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
