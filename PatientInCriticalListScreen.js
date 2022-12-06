@@ -21,7 +21,7 @@ export default function PatientInCriticalListScreen({ navigation }) {
     else {
       let resultList = []
       for (let patient of patientInCriticalList) {
-        if (patient.patientName.includes(name)) {
+        if (patient.patientName.toLowerCase().includes(name.toLowerCase())) {
           resultList.push(patient)
         }
       }

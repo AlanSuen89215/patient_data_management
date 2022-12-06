@@ -31,7 +31,7 @@ export default function PatientListScreen({ navigation }) {
     else {
       let resultList = []
       for (let patient of patientList) {
-        if (patient.patientName.includes(name)) {
+        if (patient.patientName.toLowerCase().includes(name.toLowerCase())) {
           resultList.push(patient)
         }
       }
