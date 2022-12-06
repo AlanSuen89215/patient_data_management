@@ -6,6 +6,7 @@ import {
   TextInput,
   SafeAreaView,
   FlatList,
+  TouchableWithoutFeedback
 } from "react-native";
 import EndPointConfig from "./EndPointConfig";
 
@@ -76,6 +77,7 @@ export default function PatientInCriticalListScreen({ navigation }) {
       <SafeAreaView style={styles.rowContainer}>
         <FlatList
           data={displayedList}
+          onStartShouldSetResponder = { (evt) => true }
           renderItem={({ item }) => 
             <Item
               patientId = {item.id}
@@ -92,14 +94,14 @@ export default function PatientInCriticalListScreen({ navigation }) {
 
 function Item({ patientId, patientName, onItemPressed }) {
   return (
-    <View
+    <TouchableWithoutFeedback
       style = {styles.item}
-      onStartShouldSetResponder = { () => {
+      onPress = { () => {
         onItemPressed(patientId);
       }}
     >
       <Text style={styles.text} >{patientName}</Text>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 

@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
+  TouchableWithoutFeedback,
   TextInput,
   SafeAreaView,
   FlatList,
@@ -90,6 +90,7 @@ export default function PatientListScreen({ navigation }) {
       <SafeAreaView style={styles.rowContainer}>
         <FlatList
           data={displayedList}
+          onStartShouldSetResponder = { (evt) => true }
           renderItem={({ item }) => (
             <Item
               patientId = {item.id}
@@ -106,14 +107,14 @@ export default function PatientListScreen({ navigation }) {
 
 function Item({ patientId, patientName, onItemPressed }) {
   return (
-    <View
+    <TouchableWithoutFeedback
       style={styles.item}
-      onStartShouldSetResponder={() => {
+      onPress = {() => {
         onItemPressed(patientId);
       }}
     >
       <Text style={styles.text}>{patientName}</Text>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
