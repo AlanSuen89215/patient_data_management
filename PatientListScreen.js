@@ -16,6 +16,18 @@ export default function PatientListScreen({ navigation }) {
   const [displayedList, setdisplayedList] = React.useState([]);
   const [patientList, setPatientList] = React.useState([]);
 
+  const compare = ( a, b ) => {
+    if (a.patientName < b.patientName) {
+      return -1
+    }
+    else if (a.patientName > b.patientName) {
+      return 1
+    }
+    else {
+      return 0
+    }
+  }
+
   const onBtnAddPatientPressed = () => {
     navigation.navigate("AddPatientStack");
   };
@@ -35,6 +47,7 @@ export default function PatientListScreen({ navigation }) {
           resultList.push(patient)
         }
       }
+      resultList.sort(compare)
       setdisplayedList(resultList)
     }
   }
@@ -52,6 +65,7 @@ export default function PatientListScreen({ navigation }) {
               id: patient._id
             })
           }
+          listContent.sort(compare)
           setPatientList(listContent)
           setdisplayedList(listContent)
         }

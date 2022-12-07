@@ -14,6 +14,18 @@ export default function PatientInCriticalListScreen({ navigation }) {
   const [displayedList, setdisplayedList] = React.useState([]);
   const [patientInCriticalList, setPatientInCriticalList] = React.useState([]);
 
+  const compare = ( a, b ) => {
+    if (a.patientName < b.patientName) {
+      return -1
+    }
+    else if (a.patientName > b.patientName) {
+      return 1
+    }
+    else {
+      return 0
+    }
+  }
+
   const searchPatient = (name) => {
     if (name == "") {
       setdisplayedList(patientInCriticalList)
@@ -25,6 +37,7 @@ export default function PatientInCriticalListScreen({ navigation }) {
           resultList.push(patient)
         }
       }
+      resultList.sort(compare)
       setdisplayedList(resultList)
     }
   }
@@ -51,6 +64,7 @@ export default function PatientInCriticalListScreen({ navigation }) {
               id: patient.patient_id
             })
           }
+          listContent.sort(compare)
           setPatientInCriticalList(listContent)
           setdisplayedList(listContent)
         }
